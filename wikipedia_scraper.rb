@@ -1,0 +1,10 @@
+require 'open-uri'
+require 'nokogiri'
+
+url = "http://en.wikipedia.org/wiki/List_of_current_NBA_team_rosters"
+#url = "http://en.wikipedia.org/wiki/Premier_League"
+page = Nokogiri::HTML(open(url))
+
+page.css('td[style="text-align:left;"]').each do |line|
+	puts line.text
+end
