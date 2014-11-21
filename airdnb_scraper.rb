@@ -5,7 +5,7 @@ require 'csv'
 # Store url
 url = "https://www.airbnb.co.uk/s/London--United-Kingdom"
 
-#parse the page with nokogiri 
+#parse the page with nokogiri
 page = Nokogiri::HTML(open(url))
 
 page_numbers = []
@@ -14,7 +14,7 @@ page.css("div.pagination ul li a[target]").each do |line|
 end
 
 
-# scrap the max number of pages and store in max page variable 
+# scrap the max number of pages and store in max page variable
 max_page = page_numbers.max
 
 #empty arrays
@@ -29,12 +29,12 @@ max_page.to_i.times do |i|
 
 	url = "https://www.airbnb.co.uk/s/London--United-Kingdom?page=#{i+1}"
 	page = Nokogiri::HTML(open(url))
-	
+
 	#store data in arrays
 	page.css('div.h5.listing-name').each do |line|
 		name << line.text.strip
 	end
-	
+
 	page.css('span.h3.price-amount').each do |line|
 		price << line.text
 	end
